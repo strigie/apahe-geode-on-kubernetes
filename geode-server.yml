@@ -29,17 +29,17 @@ spec:
     spec:
       containers:
       - name: server
-        image: apachegeode/geode:1.10.0
+        image: quay.io/dhaupt/geode:1.10.0
         command:
         - sh
         - -c
         - |
-          sh /geode-config/genenete-properties.sh server && \
+          sh /geode-config/generate-properties.sh server && \
           gfsh start server \
               --name=${HOSTNAME} \
               --dir=/data \
               --server-port=40404 \
-              --properties-file=/root/geode.properties \
+              --properties-file=/tmp/geode.properties \
               --cache-xml-file=/server-config/cache.xml && \
           while true; do
             sleep 2
@@ -75,7 +75,7 @@ spec:
                 gfsh stop locator --dir=/data
       initContainers:
       - name: wait-for-locator
-        image: busybox
+        image: quay.io/quay/busybox
         command: 
           - sh
           - -c

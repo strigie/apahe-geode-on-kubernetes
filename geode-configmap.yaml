@@ -4,7 +4,7 @@ metadata:
   name: geode-config
   namespace: geode
 data:
-  genenete-properties.sh: |
+  generate-properties.sh: |
     #!/bin/bash
     SUBDOMAIN=$1
     echo "Waiting a bit so that other locators could be ready"
@@ -21,7 +21,7 @@ data:
   
     LOCATORS=$(cat /tmp/servers | paste -s -d ',' -)
 
-    cat <<EOF > /root/geode.properties
+    cat <<EOF > /tmp/geode.properties
     log-level=config
     locators=${LOCATORS}
     bind-address=${HOSTNAME}.${SUBDOMAIN}
@@ -30,4 +30,4 @@ data:
     enable-cluster-configuration=false
     EOF
 
-    echo "Genereated /root/geode.properties"
+    echo "Generated /tmp/geode.properties"
